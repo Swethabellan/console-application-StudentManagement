@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.Marshalling;
 
 class Student
 {
@@ -20,7 +21,8 @@ class Program
             Console.WriteLine("2.View all Students");
             Console.WriteLine("Search Student by ID");
             Console.WriteLine("4.Delete Student");      
-            Console.WriteLine("5.Exit");
+            Console.WriteLine("5.Update Student");
+            Console.WriteLine("6.Exit");
             Console.Write("Enter your choice: ");
             int choice=int.Parse(Console.ReadLine());
 
@@ -30,7 +32,7 @@ class Program
                 case 2: ViewAllStudents(); break;
                 case 3: SearchStudentById(); break;
                 case 4: DeleteStudent(); break;
-                case 5: return;
+                case 5: UpdateStudent(); break;
                 default: Console.WriteLine("Invalid choice"); break;
             }
 
@@ -94,4 +96,26 @@ class Program
             Console.WriteLine("Student not found");
         }
     }
+    static void UpdateStudent()
+    {
+        Console.Write("Enter Student ID to update: ");
+        int id=int.Parse(Console.ReadLine());
+
+        var student=students.Find(s => s.Id == id);
+        if (student != null)
+        {
+            Console.Write("Enter new Name: ");
+            student.Name=Console.ReadLine();
+
+            Console.Write("Enter new Age: ");
+            student.Age=int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Student updated successfully");
+        }
+        else
+        {
+            Console.WriteLine("Student not found");
+        }
+    }
+
 }
